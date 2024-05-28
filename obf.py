@@ -1,4 +1,6 @@
 # blankOBF improved by lawxsz
+#
+#
 
 import random, string, base64, codecs, argparse, os, sys, hashlib
 from textwrap import wrap
