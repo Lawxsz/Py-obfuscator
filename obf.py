@@ -88,7 +88,8 @@ if __name__ == "__main__":
     if args.path is None:
         args.path = "Obfuscated_" + os.path.basename(sourcefile)
 
-    with open(sourcefile) as file:
+    # Specify the encoding as 'utf-8'
+    with open(sourcefile, encoding='utf-8') as file:
         code = file.read()
 
     lawxszcrykt(code, args.path)
