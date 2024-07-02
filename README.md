@@ -1,6 +1,7 @@
 # Python Code Obfuscator
 
 - In executables also decreases detections!
+- Recommend Python 3.10.6
 
 # Behavior 🧬
 
