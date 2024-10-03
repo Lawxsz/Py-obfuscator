@@ -1,4 +1,4 @@
-# Python Code Obfuscator
+# Python Code Obfuscator [30 STARS AND FUD OBFUSCATOR ⭐]
 
 - In executables also decreases detections!
 - Recommend Python 3.10.6
