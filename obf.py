@@ -1,4 +1,4 @@
-import random, string, base64, codecs, argparse, os, sys
+import random, string, base64, codecs, argparse, os, sys, subprocess, requests
 from textwrap import wrap
 from lzma import compress
 from marshal import dumps
