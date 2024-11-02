@@ -19,5 +19,5 @@ python obf.py script_name.py
 `To the encrypted file you must import the modules that your stub uses`
 
 # Contact 🧲
-t.me/lawxszchannel
+t.me/lawxszdev
 t.me/lawxsz (me)
