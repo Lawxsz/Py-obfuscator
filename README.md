@@ -14,7 +14,7 @@
 
 # Guide
 ```
-python obf.py -i script_name.py
+python obf.py -i script_name.py -o script_output.py
 ```
 `To the encrypted file you must import the modules that your stub uses`
 
