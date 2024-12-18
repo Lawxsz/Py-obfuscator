@@ -1,4 +1,4 @@
-# Python Code Obfuscator [30 STARS AND FUD OBFUSCATOR ⭐]
+# Python Code Obfuscator [100 STARS AND FUD AUTOMATIC OBFUSCATOR ⭐]
 
 - In executables also decreases detections!
 - Recommend Python 3.10.6
@@ -16,8 +16,9 @@
 ```
 python obf.py -i script_name.py -o script_output.py
 ```
-`To the encrypted file you must import the modules that your stub uses`
+`To the encrypted file you must import the modules that your stub uses or use include imports!`
 
 # Contact 🧲
 t.me/lawxszdev
 t.me/lawxsz (me)
+web: https://prysmax.xyz
